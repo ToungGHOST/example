@@ -6,7 +6,6 @@ if (!$conn->set_charset("utf8")) {
     exit();
 }
 
-$conn->select_db("test");
 $conn->select_db("dev_database");
 
 ?>

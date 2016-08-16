@@ -19,11 +19,30 @@
       <div class="header clearfix">
         <h3 class="text-muted">PHP MySQL การค้นหาข้อมูล : SUNZANDESIGN.BLOGSPOT.COM	</h3>
       </div>
+      
+       <form class="form-horizontal" method="POST" action="list.php">
+		  <div class="form-group">
+			<label for="inputEmail3" class="col-sm-2 control-label">ค้นหา : </label>
+			
+			 <input type="text" class="form-control" name="txt_keyword" placeholder="ค้นหา">
+			<input type="submit" value="ค้นหา" />
+		</div>
+		
+			
+		
+	</form>
     
       <div class="row">
 		<?php
+		
+			$search_text = isset($_POST['txt_keyword']) ? $_POST['txt_keyword'] : '';
+			
 			$data = array();
-			if ($result = $conn->query("SELECT * FROM comments")) {
+			$sql = "SELECT * FROM comments  
+					WHERE `name` LIKE '%$search_text%'  
+					OR detail LIKE '%$search_text%'";
+			echo $sql;
+			if ($result = $conn->query($sql)) {
 				//printf("Select returned %d rows.\n", $result->num_rows);
 				while($row = $result->fetch_array(MYSQLI_ASSOC)){
 					//print_r($row);echo '<br>';
